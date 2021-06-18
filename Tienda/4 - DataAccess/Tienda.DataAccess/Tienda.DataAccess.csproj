@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\5 - Common\Tienda.Interfaces\Tienda.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
