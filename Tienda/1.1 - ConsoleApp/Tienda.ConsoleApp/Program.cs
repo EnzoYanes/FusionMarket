@@ -22,7 +22,8 @@ namespace Tienda.ConsoleApp
                     2 alta de producto
                     3 eliminar producto
                     4 modificar producto
-                    5 salir
+                    5 Obtener productos filtrados
+                    6 salir
                 ");
                 var entrada = Console.ReadLine();
 
@@ -137,6 +138,31 @@ namespace Tienda.ConsoleApp
                             break;
                         };
                     case "5":
+                        {
+                            Console.WriteLine("Obtener producto filtrado");
+
+                            Console.Write("PageIndex: ");
+                            int pageIndex = int.Parse(Console.ReadLine());
+                            Console.Write("PageSize: ");
+                            int pageSize = int.Parse(Console.ReadLine());
+                            Console.Write("Name: ");
+                            string name = Console.ReadLine();
+                            Console.Write("CategoryId: ");
+                            int categoryId;
+                            int.TryParse(Console.ReadLine(), out categoryId);
+                            Console.Write("OrderByNameOrPrice: ");
+                            string orderby = Console.ReadLine();
+                            Console.Write("AscOrDesc: ");
+                            string asc = Console.ReadLine();
+
+                            var products = logic.GetProductsPaginated(pageIndex, pageSize, name, categoryId, orderby, asc);
+                            foreach (var producto in products)
+                            {
+                                Console.WriteLine($" id {producto.Id}, Nombre {producto.Name}, Descripcion {producto.Description}, Precio {producto.Price}");
+                            }
+                            break;
+                        };
+                    case "6":
                         {
                             Console.WriteLine("salir");
                             finalizar = true;

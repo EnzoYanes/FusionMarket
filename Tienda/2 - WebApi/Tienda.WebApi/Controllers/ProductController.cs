@@ -43,6 +43,15 @@ namespace Tienda.WebApi.Controllers
 
         }
 
+        // GET api/<Product>/GetProductsPaginated
+        [HttpGet]
+        [Route("GetProductsPaginated")]
+        public ActionResult<IEnumerable<ProductForList>> GetProductsPaginated([FromQuery] int pageIndex, int pageSize, string name, int categoryId, string orderByNameOrPrice, string ascOrDesc)
+        {
+            var products = _productLogic.GetProductsPaginated(pageIndex, pageSize, name, categoryId, orderByNameOrPrice, ascOrDesc);
+            return Ok(products.Select(c => new ProductForList(c.Id, c.Name, c.Description, c.Price)));
+        }
+
         // POST api/<Product>
         [HttpPost]
         public ActionResult<int> Post([FromBody] ProductBase product)

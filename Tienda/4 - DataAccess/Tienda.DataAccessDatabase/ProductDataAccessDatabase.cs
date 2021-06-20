@@ -3,6 +3,7 @@ using Dtos;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Tienda.Interfaces;
 
@@ -101,6 +102,31 @@ namespace Tienda.DataAccessDatabase
                 connection.Open();
                 return connection.QueryFirstOrDefault<Product>(queryString, new { Id = id });
             }
+        }
+
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string orderByNameOrPrice, string ascOrDesc)
+        {
+            List<Product> products;
+            int totalPages;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var queryString = "exec [Products_GetProductsPaginated] @PageIndex, @PageSize, @Name, @CategoryId, @OrderByNameOrPrice, @ASCorDESC";
+                var values = new
+                {
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    Name = name,
+                    CategoryId = categoryId,
+                    OrderByNameOrPrice = orderByNameOrPrice,
+                    ASCorDESC = ascOrDesc
+                };
+                connection.Open();
+                var reader = connection.QueryMultiple(queryString, values);
+                products = reader.Read<Product>().AsList();
+                totalPages = reader.Read<int>().FirstOrDefault();
+            }
+
+            return products;
         }
 
         public List<Product> ListProducts()

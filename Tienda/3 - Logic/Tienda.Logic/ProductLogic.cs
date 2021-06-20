@@ -42,5 +42,10 @@ namespace Tienda.Logic
         {
             return dataAccess.GetProduct(id);
         }
+
+        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string OrderByNameOrPrice, string AscOrDesc)
+        {
+            return dataAccess.GetProductsPaginated(pageIndex, pageSize, name, categoryId, OrderByNameOrPrice, AscOrDesc);
+        }
     }
 }
