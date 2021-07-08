@@ -31,6 +31,10 @@ namespace Tienda.WebApi
           
             services.AddSingleton<IProductLogic, ProductLogic>();
             services.AddSingleton<IProductPersistence>(s => new ProductDataAccessDatabase(Configuration.GetConnectionString("Default")));
+            services.AddCors(options => options.AddPolicy("AllowWebApp",
+                builder => builder.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +46,8 @@ namespace Tienda.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TiendaWeb v1"));
             }
+
+            app.UseCors("AllowWebApp");
 
             app.UseHttpsRedirection();
 

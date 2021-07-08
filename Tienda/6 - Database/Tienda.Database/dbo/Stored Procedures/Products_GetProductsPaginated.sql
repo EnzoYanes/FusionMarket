@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[Products_GetProductsPaginated]
 	-- Add the parameters for the stored procedure here
 	@PageIndex INT,
 	@PageSize INT,
-	@Name VARCHAR(20),
+	@Name VARCHAR(20) NULL,
 	@CategoryId INT,
 	@OrderByNameOrPrice VARCHAR(10),
 	@ASCorDESC VARCHAR(5)
@@ -23,10 +23,6 @@ BEGIN
 	BEGIN
 		SET @PageIndex = 1
 	END
-	IF(@Name IS NULL)
-	BEGIN
-		SET @Name = ''
-	END
 	SET @OrderByNameOrPrice = LOWER(@OrderByNameOrPrice);
 	SET @ASCorDESC = LOWER(@ASCorDESC)
 	IF(@OrderByNameOrPrice NOT IN ('name','price') OR @OrderByNameOrPrice IS NULL)
@@ -40,7 +36,8 @@ BEGIN
 
 	SELECT *
 	FROM dbo.Products
-	WHERE [Name] like '%'+@Name+'%' AND (@CategoryId = 0 OR CategoryId = @CategoryId)
+	WHERE ([Name] IS NULL OR [Name] like '%'+@Name+'%') 
+		AND (@CategoryId = 0 OR CategoryId = @CategoryId)
 	ORDER BY 
 		CASE WHEN @OrderByNameOrPrice='name' AND @ASCorDESC='asc' THEN [Name] END ASC,
 		CASE WHEN @OrderByNameOrPrice='name' AND @ASCorDESC='desc' THEN [Name] END DESC,

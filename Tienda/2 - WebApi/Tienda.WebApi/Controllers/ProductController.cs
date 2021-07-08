@@ -24,9 +24,9 @@ namespace Tienda.WebApi.Controllers
         // GET: api/<Product>
         [HttpGet]
         [EnableCors]
-        public ActionResult<IEnumerable<ProductForList>> Get([FromQuery]ProductFilter priceFilter)
+        public ActionResult<IEnumerable<ProductForList>> Get()
         {
-            var products = _productLogic.ListProducts().Where(t => t.Price > priceFilter.Price).Select(c => new ProductForList(c.Id, c.Name, c.Description, c.Price));
+            var products = _productLogic.ListProducts().Select(c => new ProductForList(c.Id, c.Name, c.Description, c.Price));
             return Ok(products);
         }
 
