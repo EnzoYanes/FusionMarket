@@ -1,11 +1,10 @@
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <span>Fusion Market</span>
-  <nav>
-    <a routerLink="/">Home</a>
-    <a routerLink="/products">Products</a>
-  </nav>
-</div>
+<mat-toolbar class="example-header">
+  <div class="example-button-row">
+    Fusion Market
+    <a mat-raised-button routerLink="/register">Registro</a>
+    <a mat-raised-button routerLink="/products">Productos</a>
+  </div>
+</mat-toolbar>
 
 <div class="content" role="main">
   <router-outlet></router-outlet>
