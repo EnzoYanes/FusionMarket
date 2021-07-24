@@ -37,6 +37,7 @@ namespace Tienda.WebApi
             services.AddSingleton<IProductLogic, ProductLogic>();
             services.AddSingleton<IUserPersistence>(s => new UserDataAccessDatabase(Configuration.GetConnectionString("Default")));
             services.AddSingleton<IProductPersistence>(s => new ProductDataAccessDatabase(Configuration.GetConnectionString("Default")));
+            services.AddSingleton<ICategoryPersistence>(s => new CategoryDataAccessDatabase(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

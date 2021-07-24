@@ -36,7 +36,7 @@ BEGIN
 
 	SELECT *
 	FROM dbo.Products
-	WHERE ([Name] IS NULL OR [Name] like '%'+@Name+'%') 
+	WHERE (@Name IS NULL OR [Name] like '%'+@Name+'%') 
 		AND (@CategoryId = 0 OR CategoryId = @CategoryId)
 	ORDER BY 
 		CASE WHEN @OrderByNameOrPrice='name' AND @ASCorDESC='asc' THEN [Name] END ASC,

@@ -68,6 +68,5 @@
     <Build Include="dbo\Tables\OrderLines.sql" />
     <Build Include="dbo\Tables\Categories.sql" />
     <Build Include="dbo\Stored Procedures\Products_GetProductsPaginated.sql" />
-    <Build Include="dbo\Stored Procedures\Users_AddUser.sql" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.myAppUrl + this.myApiUrl);
+  getProducts(pageSize:string, name: string, categoryId: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.myAppUrl + this.myApiUrl + 'GetProductsPaginated?pageIndex=1&pageSize='+pageSize+'&name='+name+'&categoryId='+categoryId+'&orderByNameOrPrice=name&ascOrDesc=asc');
   }
 }
