@@ -46,8 +46,8 @@ BEGIN
 	OFFSET (@PageSize * (@PageIndex -1)) ROWS
 	FETCH NEXT @PageSize ROWS ONLY
 
-	SET @TotalRows = (SELECT COUNT(*) FROM dbo.Products WHERE [Name] like '%'+@Name+'%' AND (@CategoryId = 0 OR CategoryId = @CategoryId))
-
-	SELECT CEILING(@TotalRows / CAST(@PageSize as FLOAT)) AS TotalPages
-
+	SELECT COUNT(*) AS TotalItems
+	FROM dbo.Products
+	WHERE (@Name IS NULL OR [Name] like '%'+@Name+'%') 
+		AND (@CategoryId = 0 OR CategoryId = @CategoryId)
 END

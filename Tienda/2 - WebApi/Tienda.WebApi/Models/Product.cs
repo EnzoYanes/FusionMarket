@@ -32,4 +32,10 @@ namespace Tienda.WebApi.Models
             Price = price;
         }
     }
+
+    public class ProductPaginated
+    {
+        public List<ProductForList> products { get; set; }
+        public int TotalRows { get; set; }
+    }
 }

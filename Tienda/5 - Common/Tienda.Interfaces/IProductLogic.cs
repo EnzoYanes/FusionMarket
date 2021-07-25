@@ -7,7 +7,7 @@ namespace Tienda.Interfaces
     {
         Product GetProduct(int id);
 
-        List<Product> GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string OrderByNameOrPrice, string AscOrDesc);
+        ProductPaginated GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string OrderByNameOrPrice, string AscOrDesc);
 
         Product CreateProduct(Product product);
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../Interfaces/product';
+import { Product, ProductsPaginated } from '../Interfaces/product';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(pageSize:string, name: string, categoryId: string): Observable<Product[]> {
-    return this.http.get<Product[]>(this.myAppUrl + this.myApiUrl + 'GetProductsPaginated?pageIndex=1&pageSize='+pageSize+'&name='+name+'&categoryId='+categoryId+'&orderByNameOrPrice=name&ascOrDesc=asc');
+  getProducts(pageIndex:number, pageSize:number, name: string, categoryId: string, orderBy:string, ascORdesc:string): Observable<ProductsPaginated> {
+    return this.http.get<ProductsPaginated>(this.myAppUrl + this.myApiUrl + 'GetProductsPaginated?pageIndex='+(pageIndex + 1)+'&pageSize='+pageSize+'&name='+name+'&categoryId='+categoryId+'&orderByNameOrPrice='+orderBy+'&ascOrDesc='+ascORdesc);
   }
 }

@@ -59,7 +59,7 @@ namespace Tienda.DataAccess
             return Products.FirstOrDefault(p => p.Id == id);
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string OrderByNameOrPrice, string AscOrDesc)
+        public ProductPaginated GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string OrderByNameOrPrice, string AscOrDesc)
         {
             throw new NotImplementedException();
         }

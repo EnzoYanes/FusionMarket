@@ -104,10 +104,9 @@ namespace Tienda.DataAccessDatabase
             }
         }
 
-        public List<Product> GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string orderByNameOrPrice, string ascOrDesc)
+        public ProductPaginated GetProductsPaginated(int pageIndex, int pageSize, string name, int categoryId, string orderByNameOrPrice, string ascOrDesc)
         {
-            List<Product> products;
-            int totalPages;
+            ProductPaginated prodPaginated = new ProductPaginated();
             using (var connection = new SqlConnection(connectionString))
             {
                 var queryString = "exec [Products_GetProductsPaginated] @PageIndex, @PageSize, @Name, @CategoryId, @OrderByNameOrPrice, @ASCorDESC";
@@ -122,11 +121,11 @@ namespace Tienda.DataAccessDatabase
                 };
                 connection.Open();
                 var reader = connection.QueryMultiple(queryString, values);
-                products = reader.Read<Product>().AsList();
-                totalPages = reader.Read<int>().FirstOrDefault();
+                prodPaginated.products = reader.Read<Product>().AsList();
+                prodPaginated.TotalRow = reader.Read<int>().FirstOrDefault();
             }
 
-            return products;
+            return prodPaginated;
         }
 
         public List<Product> ListProducts()

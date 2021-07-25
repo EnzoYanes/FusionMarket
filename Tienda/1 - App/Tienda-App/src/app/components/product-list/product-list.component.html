@@ -3,7 +3,7 @@
 <form [formGroup]="filterForm">
   <div class="row">
     <div class="col-4">
-      <mat-form-field appearance="fill">
+      <mat-form-field class="itemInline" appearance="fill">
         <mat-label>Categorias</mat-label>
         <mat-select formControlName="selectedCategory" (selectionChange)="changeFilter()">
           <mat-option [value]="0">Todas</mat-option>
@@ -13,7 +13,7 @@
     </div>
   
     <div class="col">
-      <mat-form-field appearance="fill">
+      <mat-form-field class="itemInline" appearance="fill">
         <mat-label>Buscar</mat-label>
         <input matInput type="text" formControlName="searchInput" (ngModelChange)="changeFilter()">
       </mat-form-field>
@@ -23,7 +23,7 @@
 
 <div class="productos">
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="products">
+    <table mat-table matSort [dataSource]="products" (matSortChange)="sortChanged($event)">
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -31,7 +31,7 @@
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
         <td mat-cell *matCellDef="let item"> {{item.name}} </td>
       </ng-container>
 
@@ -41,8 +41,17 @@
       </ng-container>
 
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> Precio </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
         <td mat-cell *matCellDef="let item"> {{item.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="add">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-mini-fab color="primary">
+            <mat-icon>add_shopping_cart</mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -50,8 +59,10 @@
     </table>
 
     <mat-paginator [length]="length"
+                [pageIndex]="pageIndex"
                 [pageSize]="pageSize"
-                [pageSizeOptions]="pageSizeOptions">
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="getPaginatorData($event)">
     </mat-paginator>
 
   </div>
