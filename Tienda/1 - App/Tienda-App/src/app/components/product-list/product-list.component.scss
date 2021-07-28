@@ -2,12 +2,17 @@ h2{
     text-align: center;
 }
 
+table{
+    width: 100%;
+}
+
 table tr{
     margin: 10px;
 }
 
 .mat-column-id{
     padding-right: 20px;
+    width: 50px;
 }
 
 .mat-column-name{
@@ -17,11 +22,15 @@ table tr{
 
 .mat-column-description{
     padding-right: 10px;
-    width: 300px;
 }
 .mat-column-price{
     padding-right: 10px;
     width: 100px;
+}
+
+.mat-column-add{
+    padding-right: 10px;
+    width: 150px;
 }
 
 .itemInline{

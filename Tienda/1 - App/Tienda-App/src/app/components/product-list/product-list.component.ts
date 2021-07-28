@@ -38,6 +38,11 @@ export class ProductListComponent implements OnInit {
     this.getCategories();
   }
 
+  btnAdd_Click(item: Product){
+    console.log(item);
+    item.itemNumbers = 0;
+  }
+
   changeFilter() {
     this.pageIndex = 0;
     this.getProducts(this.pageIndex, this.pageSize, this.searchInput?.value, this.selectedCategory?.value, this.orderBy, this.ascORdesc);

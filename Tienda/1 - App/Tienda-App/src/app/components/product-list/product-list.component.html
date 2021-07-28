@@ -6,7 +6,7 @@
       <mat-form-field class="itemInline" appearance="fill">
         <mat-label>Categorias</mat-label>
         <mat-select formControlName="selectedCategory" (selectionChange)="changeFilter()">
-          <mat-option [value]="0">Todas</mat-option>
+          <mat-option value="0">Todas</mat-option>
           <mat-option *ngFor="let item of categories" [value]="item.id">{{item.description}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -48,9 +48,14 @@
       <ng-container matColumnDef="add">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let item">
-          <button mat-mini-fab color="primary">
-            <mat-icon>add_shopping_cart</mat-icon>
-          </button>
+          <div>
+            <mat-form-field class="me-3" style="width: 40px;">
+              <input type="number" matInput [(ngModel)]="item.itemNumbers" min="0">
+            </mat-form-field>
+            <button [disabled]="item.itemNumbers < 1 || item.itemNumbers == null" mat-mini-fab color="primary" (click)="btnAdd_Click(item)">
+              <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+          </div>
         </td>
       </ng-container>
 

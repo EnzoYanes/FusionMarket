@@ -2,7 +2,8 @@ export interface Product {
     id: number;
     name: string;
     description: string;
-    price: number
+    price: number;
+    itemNumbers: number;
 }
 
 export interface ProductsPaginated{

@@ -9,7 +9,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
-
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [		
@@ -24,7 +24,8 @@ import { RegisterComponent } from './components/register/register.component';
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
