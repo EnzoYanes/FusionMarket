@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Store } from '@ngrx/store';
 import { Category } from 'src/app/Interfaces/category';
 import { Product } from 'src/app/Interfaces/product';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
+import { addOrderLine } from 'src/app/store/action/order-line.actions';
+import { OrderLineState } from 'src/app/store/reducer/order-line.reducer';
 
 @Component({
   selector: 'app-product-list',
@@ -26,7 +29,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(private _productService: ProductService,
     private _categoryService: CategoryService,
-    public fb: FormBuilder) { }
+    public fb: FormBuilder,
+    private store: Store<OrderLineState>) { }
     
   filterForm = this.fb.group({
     selectedCategory: ['0'],
@@ -39,7 +43,15 @@ export class ProductListComponent implements OnInit {
   }
 
   btnAdd_Click(item: Product){
-    console.log(item);
+    let prod: Product;
+    prod = {
+      name: item.name,
+      description: item.description,
+      id: item.id,
+      itemNumbers: item.itemNumbers,
+      price: item.price
+    }
+    this.store.dispatch(addOrderLine(prod));
     item.itemNumbers = 0;
   }
 

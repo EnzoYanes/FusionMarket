@@ -10,12 +10,18 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
 import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { orderLineFeatureKey, reducer } from './store/reducer/order-line.reducer';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [		
     AppComponent,
     ProductListComponent,
-    RegisterComponent
+    RegisterComponent,
+    OrderComponent
    ],
   imports: [
     BrowserModule,
@@ -25,7 +31,9 @@ import { StoreModule } from '@ngrx/store';
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forFeature(orderLineFeatureKey, reducer),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "Tienda-App"
+  "defaultProject": "Tienda-App",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
