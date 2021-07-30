@@ -3,7 +3,12 @@
     Fusion Market
     <a mat-raised-button routerLink="/register">Registro</a>
     <a mat-raised-button routerLink="/products">Productos</a>
-    <a mat-raised-button routerLink="/order">Carrito</a>
+    <a mat-raised-button routerLink="/ordersToUser">Ordenes</a>
+    <ng-container *ngIf="orderLines$ | async as order">
+      <a mat-raised-button routerLink="/order" [matBadge]="order.length" [hidden]="order.length == 0">
+        <mat-icon>shopping_cart</mat-icon>
+      </a>
+    </ng-container>
   </div>
 </mat-toolbar>
 

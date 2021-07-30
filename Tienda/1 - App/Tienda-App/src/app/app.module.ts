@@ -15,13 +15,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { orderLineFeatureKey, reducer } from './store/reducer/order-line.reducer';
 import { OrderComponent } from './components/order/order.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
 
 @NgModule({
   declarations: [		
     AppComponent,
     ProductListComponent,
     RegisterComponent,
-    OrderComponent
+    OrderComponent,
+    OrderListComponent
    ],
   imports: [
     BrowserModule,

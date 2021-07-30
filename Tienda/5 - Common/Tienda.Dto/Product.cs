@@ -16,4 +16,11 @@ namespace Dtos
         public List<Product> products { get; set; }
         public int TotalRow { get; set; }
     }
+
+    public class ProductInOrder
+    {
+        public int id { get; set; }
+        public double price { get; set; }
+        public int itemNumbers { get; set; }
+    }
 }

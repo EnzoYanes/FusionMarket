@@ -38,4 +38,13 @@ namespace Tienda.WebApi.Models
         public List<ProductForList> products { get; set; }
         public int TotalRows { get; set; }
     }
+
+    public class ProductInOrder
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public double price { get; set; }
+        public int itemNumbers { get; set; }
+    }
 }

@@ -27,7 +27,7 @@ namespace Tienda.WebApi
             services.AddCors(options =>
             {
                 options.AddPolicy("Default",
-                    builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
+                    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
             services.AddSwaggerGen(c =>
             {
@@ -38,6 +38,7 @@ namespace Tienda.WebApi
             services.AddSingleton<IUserPersistence>(s => new UserDataAccessDatabase(Configuration.GetConnectionString("Default")));
             services.AddSingleton<IProductPersistence>(s => new ProductDataAccessDatabase(Configuration.GetConnectionString("Default")));
             services.AddSingleton<ICategoryPersistence>(s => new CategoryDataAccessDatabase(Configuration.GetConnectionString("Default")));
+            services.AddSingleton<IOrderPersistence>(s => new OrderDataAccessDataBase(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
