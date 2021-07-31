@@ -74,6 +74,23 @@ namespace Tienda.DataAccessDatabase
             }
         }
 
+        public List<OrderForAdmin> GetOrdersToAdmin()
+        {
+            var queryString = @"SELECT o.Id, o.CreatedDate, u.Name, SUM(ol.Subtotal) as TotalPrice, o.StatusId, os.Description as Status
+                                FROM Orders o
+                                INNER JOIN OrderStatus os ON os.OrderStatusId = o.StatusId
+                                INNER JOIN OrderLines ol ON ol.OrderId = o.Id
+                                INNER JOIN Users U ON u.Id = o.UserId
+                                GROUP BY o.Id, o.CreatedDate, u.Name, o.StatusId, os.Description
+                                ORDER BY o.CreatedDate DESC";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var orders = connection.Query<OrderForAdmin>(queryString).AsList();
+                return orders;
+            }
+        }
+
         public List<OrderForList> GetOrdersToUser()
         {
             var queryString = @"SELECT o.BillingNumber, u.Name, os.Description as Status, o.CreatedDate, SUM(ol.Subtotal) as TotalPrice
@@ -88,6 +105,18 @@ namespace Tienda.DataAccessDatabase
             {
                 var orders = connection.Query<OrderForList>(queryString).AsList();
                 return orders;
+            }
+        }
+
+        public void SetOrderState(int orderId, int statusId)
+        {
+            var queryString = @"UPDATE Orders
+                                SET StatusId = @StatusId
+                                WHERE Id = @OrderId";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Execute(queryString, new { OrderId = orderId, StatusId = statusId });
             }
         }
     }

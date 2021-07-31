@@ -21,4 +21,14 @@ namespace Tienda.WebApi.Models
         public DateTime CreatedDate { get; set; }
         public decimal TotalPrice { get; set; }
     }
+
+    public class OrderForAdmin
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int StatusId { get; set; }
+        public string Status { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public decimal TotalPrice { get; set; }
+    }
 }

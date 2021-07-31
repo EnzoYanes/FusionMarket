@@ -23,9 +23,20 @@ namespace Tienda.WebApi.Controllers
 
         // GET: api/<OrderController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("GetOrdersToAdmin")]
+        public ActionResult<List<OrderForAdmin>> GetOrdersToAdmin()
         {
-            return new string[] { "value1", "value2" };
+            var orders = _orderPersistence.GetOrdersToAdmin().Select(o => new OrderForAdmin
+            {
+                Id = o.Id,
+                Name = o.Name,
+                CreatedDate = o.CreatedDate,
+                TotalPrice = o.TotalPrice,
+                Status = o.Status,
+                StatusId = o.StatusId
+            }).ToList();
+
+            return orders;
         }
 
         [HttpGet]
@@ -79,8 +90,9 @@ namespace Tienda.WebApi.Controllers
 
         // PUT api/<OrderController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] int statusId)
         {
+            _orderPersistence.SetOrderState(id, statusId);
         }
 
         // DELETE api/<OrderController>/5
