@@ -12,9 +12,9 @@ import { selectOrderLines } from './store/selector/order-line.selectors';
 })
 export class AppComponent {
   title = 'Tienda-App';
-  orderLines$: Observable<Product[]>;
+  orderLines: Product[] = [];
 
   constructor(private store: Store<OrderLineState>){
-    this.orderLines$ = this.store.pipe(select(selectOrderLines));
+    this.store.pipe(select(selectOrderLines)).subscribe(data => this.orderLines = data);
   }
 }

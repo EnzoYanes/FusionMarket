@@ -21,13 +21,4 @@ export class OrderListComponent implements OnInit {
   getOrders(): void {
     this._orderService.GetOrdersToUser().subscribe(data => this.orders = data);
   }
-
-
-  /* getProducts(pageIndex:number, pageSize:number, name: string, categoryId: string, orderBy:string, ascORdesc:string): void {
-    this._productService.getProducts(pageIndex, pageSize, name, categoryId, orderBy, ascORdesc).subscribe(data => {
-      this.products = data.products;
-      this.length = data.totalRow;
-    });
-  } */
-
 }

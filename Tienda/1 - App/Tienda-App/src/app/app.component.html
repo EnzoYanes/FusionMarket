@@ -1,11 +1,11 @@
 <mat-toolbar class="example-header">
   <div class="example-button-row">
-    Fusion Market
     <a mat-raised-button routerLink="/register">Registro</a>
     <a mat-raised-button routerLink="/products">Productos</a>
     <a mat-raised-button routerLink="/ordersToUser">Ordenes</a>
-    <ng-container *ngIf="orderLines$ | async as order">
-      <a mat-raised-button routerLink="/order" [matBadge]="order.length" [hidden]="order.length == 0">
+    Fusion Market
+    <ng-container *ngIf="orderLines">
+      <a mat-raised-button routerLink="/order" [matBadge]="orderLines.length" [hidden]="orderLines.length == 0">
         <mat-icon>shopping_cart</mat-icon>
       </a>
     </ng-container>
